@@ -1,0 +1,2 @@
+# dmenu
+scripts for dmenu
