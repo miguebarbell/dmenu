@@ -13,7 +13,7 @@ After select any action it gives you the possibility of make another action.
 - Add: add a torrent from the given url, it takes .torrent or magnetic link.
 - Priority: the selected torrent will be high priority.
 ###tips:
-####adding a torrent (easy):
+####adding a torrent:
 Copy the url (.torrent or magnetic links), then execute dTorrent, select the Add option, select clip from the clipboard, and your torrent is added.
 
 
