@@ -2,19 +2,16 @@
 
 function main() {
   transmission-daemon
-:'
-
-'
   function menu_after() {
   option_after=$(echo -e 'Exit\nContinue' | dmenu -p 'Whats next?')
     if [[ $option_after == 'Continue' ]]; then
       main
     fi
   }
-  :'make the last decision of the choice making process, give two options:
-  Exit: exit the program
-  Continue: make recursive the main function.
-  '
+#  make the last decision of the choice making process, give two options:
+#  Exit: exit the program
+#  Continue: make recursive the main function.
+#
 
   option=$(echo -e 'Add\nPrioritize\nStart\nStop\nStart All\nStop All\nRemove\nKill Daemon' | dmenu -p 'options:')
   if [[ $option == 'Add' ]]; then
