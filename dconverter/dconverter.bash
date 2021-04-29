@@ -13,21 +13,39 @@ main () {
     unit=$(echo -e 'Kilos\nPounds' | dmenu -p '')
     weight $quantity $unit
     fi
+  last
 }
 
 temperature () {
-  degrees=$1
-  type=$2
-  echo -e $degrees $type
-#  TODO: make a convertion celsius t farenheit and reverse
+#  echo -e $degrees $type
+  if [[ $2 == 'Celsius' ]]; then
+    echo -e | dmenu -p "$(($1 * 9/5 + 32)) °F"
+  else
+    echo -e | dmenu -p "$((($1 - 32)/1.8)) °C"
+    fi
 }
 
 distance () {
-# TODO: distance converter
+  if [[ $2 == 'Mts' ]]; then
+    echo -e | dmenu -p "$(($1 / 0.3048)) Feets"
+  else
+    echo -e | dmenu -p "$(($1 * 0.3048)) Meters"
+    fi
 }
 
 weight () {
-  # TODO: weight function
+  if [[ $2 == 'Kilos' ]]; then
+    echo -e | dmenu -p "$(($1 * 2.20462262185)) Pounds"
+  else
+    echo -e | dmenu -p "$(($1 / 2.20462262185)) Kilos"
+    fi
+}
+
+last () {
+  last=$(echo -e 'Yes\nNo' | dmenu -p 'Another convertion?')
+  if [[ $last == 'Yes' ]]; then
+    main
+  fi
 }
 
 main
