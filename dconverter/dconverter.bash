@@ -19,25 +19,25 @@ main () {
 temperature () {
 #  echo -e $degrees $type
   if [[ $2 == 'Celsius' ]]; then
-    echo -e | dmenu -p "$(($1 * 9/5 + 32)) °F"
+    echo -e | dmenu -p "`printf '%.*f\n' 2 $(($1 * 9/5 + 32))` °F"
   else
-    echo -e | dmenu -p "$((($1 - 32)/1.8)) °C"
+    echo -e | dmenu -p "`printf '%.*f\n' 2 $((($1 - 32)/1.8))` °C"
     fi
 }
 
 distance () {
   if [[ $2 == 'Mts' ]]; then
-    echo -e | dmenu -p "$(($1 / 0.3048)) Feets"
+    echo -e | dmenu -p "`printf '%.*f\n' 2 $(($1 / 0.3048))` Feets"
   else
-    echo -e | dmenu -p "$(($1 * 0.3048)) Meters"
+    echo -e | dmenu -p "`printf '%.*f\n' 2 $(($1 * 0.3048))` Meters"
     fi
 }
 
 weight () {
   if [[ $2 == 'Kilos' ]]; then
-    echo -e | dmenu -p "$(($1 * 2.20462262185)) Pounds"
+    echo -e | dmenu -p "`printf '%.*f\n' 2 $(($1 * 2.20462262185))` Pounds"
   else
-    echo -e | dmenu -p "$(($1 / 2.20462262185)) Kilos"
+    echo -e | dmenu -p "`printf '%.*f\n' 2 $(($1 / 2.20462262185))` Kilos"
     fi
 }
 
