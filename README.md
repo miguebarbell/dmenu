@@ -14,4 +14,14 @@ Collections of utilities for dmenu.
 > Connect to your bluetooth trusted connection, when bluetoothctl doesn't connect automatically, this do the job.
 
 >5. dmonitor:
-> use xrandr for connect to an external display
+> Use xrandr for connect to an external display
+
+>6. dconverter:
+> Simple unit converter, metric <-> imperial.
+
+>7. dtts:
+> Create a mp3 from text (Text To Speech). Use festival.
+
+Usage:
+You Should copy the script that you want (and if you want rename) to you local/bin path and make it executable (chmod +x FILE). 
+So you can access from dmenu to the script.
