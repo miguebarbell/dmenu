@@ -8,6 +8,7 @@ These programs I created because helps with my common goals, fast and easy.
   
 >2. dtranlator:
 >  Translate a word, have the capability of detect the input language, you select the output (of course) . Use google database.
+![dtranslator](dtranslator/dtranslator.gif)
 
 >3. dcurrency:
 > Convert from 43 most common currencies to USD. CLP included using webscraping.
@@ -20,9 +21,12 @@ These programs I created because helps with my common goals, fast and easy.
 
 >6. dconverter:
 > Simple unit converter, metric <-> imperial.
+![dconverter](dconverter/dconverter.gif)
 
 >7. dtts:
 > Create a mp3 from text (Text To Speech). Use festival. This is useful in message apps where you want some privacy with an anonymous voice or just prank a friend. 
+![dtts](dtts/tts2.gif)
+
 
 Usage:
 You Should copy the script that you want (and if you want rename) to you local/bin path and make it executable (chmod +x FILE). 
