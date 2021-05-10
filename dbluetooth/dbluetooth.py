@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-# TODO: make the feedback
 import subprocess
 import re
 import os
@@ -38,9 +37,17 @@ def getAdressFromArg():
     res = subprocess.check_output(stat, shell=True)
     pattern = r'(\w\w:\w\w:\w\w:\w\w:\w\w:\w\w)'
     adresses = re.findall(pattern, str(res))
-    return adresses[index]
+    return adresses[index], connect2.decode()
 
 
-os.system('bluetoothctl power on')
-command = 'bluetoothctl connect ' + str(getAdressFromArg())
-os.system(command)
+def allAbove(tupleAdressName):
+    os.system('bluetoothctl power on')
+    result = subprocess.run(['bluetoothctl', 'connect', str(tupleAdressName[0])], capture_output=True)
+    if result.returncode == 0:
+        os.system(f"echo | dmenu -p 'Connected to {tupleAdressName[1]}'")
+    else:
+        os.system(f"echo | dmenu -p 'Failed to connect {tupleAdressName[1]}'")
+        print(f"Failed to connect to {tupleAdressName[1]} check if your device is in pairing mode and the computer have any phisical button for power on the bluetooth")
+
+
+allAbove(getAdressFromArg())

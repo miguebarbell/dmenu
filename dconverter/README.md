@@ -1,4 +1,4 @@
-#dTConverter
+#dConverter
 ___
 ![gif](dconverter.gif)
 ##Description:

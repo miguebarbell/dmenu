@@ -1,5 +1,12 @@
 #dTorrent
 ___
+####Copy link
+
+![menudtorrent](dtorrentmenu.gif)
+
+####Paste it 
+
+![dtorrent](dtorrent.gif)
 ##Description:
 Simple torrent manager for transmission-daemon. It reduces the time for your most common task.
 You can still seeing your files in your browser (http://localhost:9091/transmission/web/)
