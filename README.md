@@ -1,4 +1,4 @@
-# dmenu
+﻿# dmenu
 ##Utilities for dmenu
 Collections of utilities for dmenu.
 dmenu was created for simplicity in your workflow, so you can save time in usual tasks.
