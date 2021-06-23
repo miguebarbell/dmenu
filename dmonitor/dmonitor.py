@@ -8,6 +8,7 @@ resolution = '1920x1080'
 what = 'same-as'
 actual = "eDP1"
 
+
 # TODO: extraer las resoluciones del monitor que se seleccione
 # TODO: documentatar las funciones
 
@@ -18,11 +19,12 @@ actual = "eDP1"
 #     return monitorClear
 
 def getDisconnectMonitor():
-    monitorRaw = subprocess.check_output('xrandr', shell=True)
-    monitorClear = re.findall(r"(\w+)\sconnected\s\d", monitorRaw.decode())
-    return [monitorClear[i] for i in range(0, len(monitorClear))]
+    monitor_raw = subprocess.check_output('xrandr', shell=True)
+    monitor_clear = re.findall(r"(\w+)\sconnected\s\d", monitor_raw.decode())
+    return [monitor_clear[i] for i in range(0, len(monitor_clear))]
 
-def getMonitor():
+
+def get_monitor():
     monitorRaw = subprocess.check_output('xrandr', shell=True)
     # print(f"monitor raws: {monitorRaw}")
     monitorClear = re.findall(r"(\w+)\sconnected\s\(", monitorRaw.decode())
@@ -56,7 +58,7 @@ def dmenuResolution():
     if 'Another resolution' in ansResolutionArgsClean:
         anotherResolutionArg = "echo -e | dmenu -p 'Which resolution? ex: 680x550' | xargs -I % echo '%'"
         anotherResolution = subprocess.check_output(anotherResolutionArg, shell=True)
-        resolution = re.findall(r"b'(\d+x\d+)\\n'" , str(anotherResolution))[0]
+        resolution = re.findall(r"b'(\d+x\d+)\\n'", str(anotherResolution))[0]
     elif '2K' in ansResolutionArgsClean:
         resolution = '2560x1440'
     elif '4K' in ansResolutionArgsClean:
@@ -67,16 +69,14 @@ def dmenuResolution():
         resolution = '1280x720'
 
 
-
 def dmenuOutput(outputs):
     global output
     monitors = str('\n'.join(outputs))
-    arguments = subprocess.check_output(f"echo -e '{monitors}' | dmenu -p 'Which output?' | xargs -I % echo '%'", shell=True)
+    arguments = subprocess.check_output(f"echo -e '{monitors}' | dmenu -p 'Which output?' | xargs -I % echo '%'",
+                                        shell=True)
     # print(f"selected {arguments.decode()} oooo")
     output = str(re.findall(r"b'(\w+\d+)\\n'", str(arguments))[0])
     # output = arguments.decode("UTF-8")
-
-
 
 
 def allTogether():
@@ -88,7 +88,7 @@ def allTogether():
         os.system(f"echo -e | dmenu -p 'Shutting down {output}...'")
     else:
 
-        dmenuOutput(getMonitor())
+        dmenuOutput(get_monitor())
         dmenuResolution()
         if what == 'Extra':
             # os.system(f'xrandr --output {output} --mode {resolution} --{where} {actual}')
@@ -104,6 +104,3 @@ def allTogether():
 
 
 allTogether()
-
-
-
