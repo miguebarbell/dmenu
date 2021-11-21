@@ -14,8 +14,8 @@ function main() {
   }
 
 	function get_torrent_id() {
-
-  	transmission-remote -l | awk '{ print $1 " " $(NF-1) " " $NF }' | awk 'NR>2 {print last} {last=$0}' | dmenu -l 5 -p 'Which torrent?' | awk '{ print $1 }'
+# Is better having all the information of all torrents, so everytime you use, you can check the status of all others torrents.
+		transmission-remote -l | awk '!/Sum:/ {print $0}' | dmenu -l 5 -p 'Which torrent?' | awk '{ print $1 }'
 	}
   option=$(echo -e 'Add\nPriority\nStart\nStop\nStart All\nStop All\nRemove\nKill Daemon' | dmenu -p 'options:')
   if [[ $option == 'Add' ]]; then
