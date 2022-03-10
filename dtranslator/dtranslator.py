@@ -35,24 +35,24 @@ def get_language():
     to_lang = languages.copy()
     del to_lang['Detect Language']
     languages_joined = '\n'.join(to_lang.keys())
-    language_raw = subprocess.check_output(f"echo -e '{languages_joined}' | dmenu -p 'Translate to:' | xargs -I % echo '%'", shell=True)
+    language_raw = subprocess.check_output(f"echo '{languages_joined}' | dmenu -p 'Translate to:' | xargs -I % echo '%'", shell=True)
     return languages[clear_response(language_raw)]
 
 
 def get_from_language():
     languages_joined = '\n'.join(languages.keys())
-    language_raw = subprocess.check_output(f"echo -e '{languages_joined}' | dmenu -p 'Translate from:' | xargs -I % echo '%'", shell=True)
+    language_raw = subprocess.check_output(f"echo '{languages_joined}' | dmenu -p 'Translate from:' | xargs -I % echo '%'", shell=True)
     return languages[clear_response(language_raw)]
 
 
 def get_words():
-    word_raw = subprocess.check_output("echo -e | dmenu -p 'Word to translate' | xargs -I % echo '%'", shell=True)
+    word_raw = subprocess.check_output("echo | dmenu -p 'Word to translate' | xargs -I % echo '%'", shell=True)
     return clear_response(word_raw)
 
 
 def translate():
     text = translatorNew.translate(get_words(), lang_src=get_from_language(), lang_tgt=get_language())
-    answer = subprocess.check_output(f"echo -e 'Copy to clipboard\nAnother Word\nClose'| dmenu -p '{text}'", shell=True)
+    answer = subprocess.check_output(f"echo 'Copy to clipboard\nAnother Word\nClose'| dmenu -p '{text}'", shell=True)
     if 'Copy' in str(answer):
         os.system(f"echo -n '{text}' | xclip -selection clipboard")
     elif 'Another' in str(answer):
