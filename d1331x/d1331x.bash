@@ -24,7 +24,13 @@ function search_1337x() {
 			RESULTS=$(curl -s $URL1337X/category-search/$1/$2/1/ | pup 'tbody tr td.coll-1 a:nth-of-type(2)' json{})
 			#echo $RESULTS
   fi
+	echo $RESULTS
+	if [[ "$RESULTS" == [] ]]; then
+		echo "No Results for $QUERY" | dmenu
+		exit 0
+	fi
   TITLE_SELECTED=$(echo $RESULTS | jq '.[].text' | dmenu -p 'Results:' -l 10)
+	if [[ "$TITLE_SELECTED" == "" ]]; then exit 0; fi
   LINK_SELECTED=$(echo $RESULTS | jq "map(select(.text == $TITLE_SELECTED)) | .[].href" | sed s'/"//g')
   MAGNET_LINK=$(curl -s $URL1337X$LINK_SELECTED | grep 'magnet' | pup '[href]:last-child' json{} | jq '.[0].href' | sed s'/"//g')
   if [[ 'Documentaries' == $2  || 'Movies' == $2 || 'TV' == $2 ]]; then
