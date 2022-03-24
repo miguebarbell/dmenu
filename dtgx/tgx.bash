@@ -2,7 +2,7 @@
 
 URLTGX='https://torrentgalaxy.to'
 QUERY="$(echo | dmenu -p 'Search for:' | sed s'/ /%20/g')"
-CAT=$(echo -e 'Movies\nTV\nGames\nMusic\nApps\nDocumentaries\nAnime\nOther\nEverything\nCancel' | dmenu -p 'Category:')
+CAT=$(echo -e 'Movies\nTV\nTraining\nGames\nMusic\nApps\nDocumentaries\nAnime\nOther\nEverything\nCancel' | dmenu -p 'Category:')
 function search_tgx() {
   if [[ $2 == 'Everything' ]]; then
     PAGE_RESULTS=$(curl -s "$URLTGX/torrents.php?search=$QUERY&lang=0&nox=2&sort=seeders&order=desc")
@@ -20,6 +20,8 @@ function search_tgx() {
     PAGE_RESULTS=$(curl -s "$URLTGX/torrents.php?c26=1&c23=1&c25=1&c24=1&c17=1&c40=1&c=37=1&c=33&search=$QUERY&lang=0&nox=2&sort=seeders&order=desc")
   elif [[ $2 == 'Anime' ]]; then
     PAGE_RESULTS=$(curl -s "$URLTGX/torrents.php?c28=1&search=$QUERY&lang=0&nox=2&sort=seeders&order=desc")
+  elif [[ $2 == 'Training' ]]; then
+    PAGE_RESULTS=$(curl -s "$URLTGX/torrents.php?c33=1&search=$QUERY&lang=0&nox=2&sort=seeders&order=desc")
   fi
   RESULTS=$(echo $PAGE_RESULTS | pup 'div#click.tgxtablecell div a' json{} | jq 'map(select(.class == "txlight"))')
   TITLE_SELECTED=$(echo $RESULTS | jq '.[].title' | dmenu -p 'Results:' -l 10)
@@ -30,13 +32,15 @@ function search_tgx() {
     WHAT=$(echo -e "Download\nStream\nCancel" | dmenu -p "What?")
     if [[ $WHAT == "Stream" ]]; then
         echo -e | dmenu -p "Streaming $TITLE_SELECTED"
-        peerflix $MAGNET_LINK -k -q -r
+        peerflix "$MAGNET_LINK" -k -q -r
         exit 0
 		elif [[ $WHAT == "Cancel" || $WHAT == "" ]]; then exit 0
     fi
   fi
   echo -e | dmenu -p "Downloading $TITLE_SELECTED"
-  transmission-remote -a $MAGNET_LINK
+
+  addtorrent "$MAGNET_LINK"
+  #transmission-remote -a $MAGNET_LINK
   exit 0
 }
 
