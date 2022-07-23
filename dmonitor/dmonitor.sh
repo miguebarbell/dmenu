@@ -1,6 +1,5 @@
 #!/usr/bin/sh
 #ALL_MONITORS=$(cat list)
-# TODO: try it in production
 ALL_MONITORS=$(xrandr)
 set_monitors() {
 	MAIN=$(printf %s "$ALL_MONITORS" | grep " connected" | sed -n 1p | cut -d' ' -f 1)
