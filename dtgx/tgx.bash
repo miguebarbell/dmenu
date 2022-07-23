@@ -37,7 +37,7 @@ function search_tgx() {
 		elif [[ $WHAT == "Cancel" || $WHAT == "" ]]; then exit 0
     fi
   fi
-  echo -e | dmenu -p "Downloading $TITLE_SELECTED"
+  #echo -e | dmenu -p "Downloading $TITLE_SELECTED"
 
   addtorrent "$MAGNET_LINK"
   #transmission-remote -a $MAGNET_LINK
