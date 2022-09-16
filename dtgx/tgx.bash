@@ -33,7 +33,8 @@ function search_tgx() {
   if [[ 'Documentaries' == "$2"  || 'Movies' == "$2" || 'TV' == "$2" ]]; then
     WHAT=$(echo -e "Download\nStream\nCancel" | dmenu -p "What?")
     if [[ $WHAT == "Stream" ]]; then
-        echo -e | dmenu -p "Streaming $TITLE_SELECTED"
+        #echo -e | dmenu -p "Streaming $TITLE_SELECTED"
+				echo "Continue" | dmenu -p "Streaming $TITLE_SELECTED" -sb "#FFD700" -sf "#000000"
         peerflix "$MAGNET_LINK" -k -q -r
         exit 0
 		elif [[ $WHAT == "Cancel" || $WHAT == "" ]]; then exit 0
