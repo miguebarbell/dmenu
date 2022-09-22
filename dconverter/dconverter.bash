@@ -30,7 +30,7 @@ temperature () {
 distance () {
   if [[ $2 == 'Mts' ]]; then
 		feet=$(awk "BEGIN {print $1 / 0.3048}")
-    echo -e | dmenu -p "`printf %.2f $feet` Feets"
+    echo -e | dmenu -p "`printf %.2f $feet` Feet"
   else
 		meters=$(awk "BEGIN {print $1 * 0.3048}")
     echo -e | dmenu -p "`printf %.2f $meters` Meters"
@@ -49,14 +49,14 @@ weight () {
 }
 
 last () {
-  last=$(echo -e 'Yes\nNo' | dmenu -p 'Another convertion?')
+  last=$(echo -e 'Yes\nNo' | dmenu -p 'Another conversion?')
   if [[ $last == 'Yes' ]]; then
     main
   fi
 }
 
 terminal() {
-# returns the automatic convertion but in the inverse unit
+# returns the automatic conversion but in the inverse unit
 # 100 k returns 45.06 pounds
 # TODO: refactor, so both main function can use the same small functions
 	unit=${2^^}
@@ -77,8 +77,8 @@ terminal() {
 		celsius=$(awk "BEGIN {print ($1 - 32)/1.8}")
 		echo "$celsius Celsius";;
 		C|CEL*)
-		farenheit=$(awk "BEGIN {print ($1 * 9/5) + 32}")
-		echo "$farenheit Farenheit"
+		fahrenheit=$(awk "BEGIN {print ($1 * 9/5) + 32}")
+		echo "$fahrenheit Fahrenheit"
 	esac
 }
 
@@ -86,5 +86,5 @@ terminal() {
 if [[ $1 == "" ]]; then
 	main
 	else
-	terminal $1 $2
+	terminal "$1" "$2"
 	fi
