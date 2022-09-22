@@ -6,13 +6,13 @@ main () {
   quantity=$(echo -e '' | dmenu -p 'Quantity: ')
   if [[ $what == 'Temperature' ]]; then
     unit=$(echo -e 'Celsius\nFahrenheit' | dmenu -p '')
-    temperature $quantity $unit
+    temperature "$quantity" "$unit"
   elif [[ $what == 'Distance' ]]; then
     unit=$(echo -e 'Mts\nFeets' | dmenu -p '')
-    distance $quantity $unit
+    distance "$quantity" "$unit"
   elif [[ $what == 'Weight' ]]; then
     unit=$(echo -e 'Kilos\nPounds' | dmenu -p '')
-    weight $quantity $unit
+    weight "$quantity" "$unit"
     fi
   last
 }
