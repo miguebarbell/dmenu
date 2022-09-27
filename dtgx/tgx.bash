@@ -40,7 +40,6 @@ function search_tgx() {
   fi
   #echo -e | dmenu -p "Downloading $TITLE_SELECTED"
 
-	echo $MAGNET_LINK
   addtorrent "$MAGNET_LINK"
   #transmission-remote -a $MAGNET_LINK
   exit 0
