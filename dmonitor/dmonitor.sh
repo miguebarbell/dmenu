@@ -6,12 +6,12 @@ set_monitors() {
 	OPTIONS=$(printf %s "$ALL_MONITORS" | grep " connected" | cut -d' ' -f 1 | sed 1d)
 	if [ -z "$OPTIONS" ]; then
 		echo "no monitors";
-		printf "" | dmenu -p "ERROR: no external monitors found!";
+		printf "" | dmenu -p "ERROR: no external monitors found!" -sb "#FF0700" -sf "#000000" -fn 'Verdana-18';
 		exit 1;
 	fi
 	EXTERNAL=$(printf %s "$OPTIONS" | dmenu -p "Which output?")
 	while [ -z "$EXTERNAL" ]; do
-		EXTERNAL=$(printf exit\\n%s "$OPTIONS" | dmenu -p "You didn't select any output, what to exit?")
+		EXTERNAL=$(printf exit\\n%s "$OPTIONS" | dmenu -p "You didn't select any output, what to exit?" -sb "#FFD700" -sf "#000000")
 		if [ "$EXTERNAL" = "exit" ]; then exit 0; fi
 		done
 
@@ -50,7 +50,7 @@ set_monitors() {
 	esac
 	#CONFIRM=$(printf "yes\nno" | dmenu -p "setting $EXTERNAL ($RESOLUTION) $WHERE $MAIN")
 	#if [ "$CONFIRM" = "yes" ]; then
-		xrandr --output "$EXTERNAL" --mode "$RESOLUTION" --"$WHERE" "$MAIN" && AGAIN=$(printf "exit\ntry it again" | dmenu -p "was as expected?") && AGAIN="exit" || AGAIN=$(printf "exit\ntry it again" | dmenu -p "something wrong, Whats next?")
+		xrandr --output "$EXTERNAL" --mode "$RESOLUTION" --"$WHERE" "$MAIN" && AGAIN=$(printf "exit\ntry it again" | dmenu -p "was as expected?") && AGAIN="exit" || AGAIN=$(printf "exit\ntry it again" | dmenu -p "something wrong, Whats next?" -sb "#FFD700" -sf "#000000")
 		#else
 			#AGAIN=$(printf "exit\ntry it again" | dmenu -p "Whats next?")
 	#fi
