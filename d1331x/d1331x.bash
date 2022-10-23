@@ -43,8 +43,10 @@ function search_1337x() {
 		elif [[ $WHAT == "Cancel" ]]; then exit 0
     fi
   fi
-  echo -e | dmenu -p "Downloading $TITLE_SELECTED"
+	transmission-daemon
   transmission-remote -a $MAGNET_LINK
+  # echo -e | dmenu -p "Downloading $TITLE_SELECTED"
+	notify-send "🔽 Torrent added." "$TITLE_SELECTED"
   exit 0
 }
 
