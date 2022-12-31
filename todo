@@ -7,9 +7,13 @@
 #
 
 file="$XDG_DATA_HOME/calcurse/todo"
+SYNC_FOLDER="/home/$USER/pCloudDrive/Miguel/sync/"
+sync() {
+	rsync "$file" "$SYNC_FOLDER"
+}
 touch "$file"
 height=$(wc -l "$file" | awk '{print $1}')
-prompt="Add/delete a task: "
+prompt="Add/delete a task"
 
 cmd=$(dmenu -l "$height" -p "$prompt" "$@" < "$file")
 while [ -n "$cmd" ]; do
@@ -21,7 +25,7 @@ while [ -n "$cmd" ]; do
 		echo "$cmd" >> "$file"
 		height=$(( height + 1 ))
  	fi
-
+	sync
 	cmd=$(dmenu -l "$height" -p "$prompt" "$@" < "$file")
 done
 
