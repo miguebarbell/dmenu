@@ -30,15 +30,18 @@ function search_tgx() {
     PAGE_RESULTS=$(curl -s "$URLTGX/torrents.php?c33=1&search=$QUERY&lang=0&nox=2&sort=seeders&order=desc")
   fi
   RESULTS=$(echo "$PAGE_RESULTS" | pup 'div#click.tgxtablecell div a' json{} | jq 'map(select(.class == "txlight"))')
+
   TITLE_SELECTED=$(echo "$RESULTS" | jq '.[].title' | dmenu -p 'Results:' -l 10 -sb '#00FFFF' -sf '#000000' -nf '#00FFFF' -nb '#000000' -shf '#FF00FF' -shb '#00FFFF' -nhb '#000000' -nhf '#FF00FF'   )
   if [[ $"$TITLE_SELECTED" == "" ]]; then exit 0; fi
   LINK_SELECTED=$(echo "$RESULTS" | jq "map(select(.title == $TITLE_SELECTED)) | .[].href" | sed s'/"//g')
-  MAGNET_LINK=$(curl -s "$URLTGX""$LINK_SELECTED" | pup 'center a.txlight.lift.btn.btn-danger' json{} | jq '.[1].href' | sed s'/"//g')
+#  MAGNET_LINK=$(curl -s "$URLTGX""$LINK_SELECTED" | pup 'center a.txlight.lift.btn.btn-danger' json{} | jq '.[1].href' | sed s'/"//g')
+  MAGNET_LINK=$(curl -s "$URLTGX""$LINK_SELECTED" | pup 'center a.txlight.lift.btn.btn-danger' json{} | jq '.[2].href' | sed s'/"//g')
   if [[ 'Documentaries' == "$2"  || 'Movies' == "$2" || 'TV' == "$2" ]]; then
     WHAT=$(echo -e "Download\nStream\nCancel" | dmenu -p "What?" -sb '#00FFFF' -sf '#000000' -nf '#00FFFF' -nb '#000000' -shf '#FF00FF' -shb '#00FFFF' -nhb '#000000' -nhf '#FF00FF'  )
     if [[ $WHAT == "Stream" ]]; then
         #echo -e | dmenu -p "Streaming $TITLE_SELECTED"
 				echo "Continue" | dmenu -p "Streaming $TITLE_SELECTED" -sb "#FFD700" -sf "#000000"
+#				echo $MAGNET_LINK
         peerflix "$MAGNET_LINK" -k -q -r
         exit 0
 		elif [[ $WHAT == "Cancel" || $WHAT == "" ]]; then exit 0
