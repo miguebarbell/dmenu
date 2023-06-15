@@ -18,7 +18,7 @@ def get_bluetooth_device():
     was = get_bluetooth()
     if was != 'BT+':
         return 'BT off'
-    stat = "bluetoothctl paired-devices"
+    stat = "bluetoothctl devices"
     res = subprocess.check_output(stat, shell=True)
     pattern = r'(Device\s\w\w:\w\w:\w\w:\w\w:\w\w:\w\w\s)([\w.\s]*)'
     devices = re.findall(pattern, str(res))

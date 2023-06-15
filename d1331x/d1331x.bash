@@ -44,6 +44,7 @@ function search_1337x() {
     fi
   fi
 	transmission-daemon
+	sleep 3
   transmission-remote -a $MAGNET_LINK
   # echo -e | dmenu -p "Downloading $TITLE_SELECTED"
 	notify-send "🔽 Torrent added." "$TITLE_SELECTED"

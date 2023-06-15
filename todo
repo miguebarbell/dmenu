@@ -6,8 +6,9 @@
 # add it.
 #
 
-file="$XDG_DATA_HOME/calcurse/todo"
-SYNC_FOLDER="/home/$USER/pCloudDrive/Miguel/sync/"
+# file="$XDG_DATA_HOME/calcurse/todo"
+SYNC_FOLDER="$XDG_DATA_HOME/calcurse/"
+file="$XDG_DATA_HOME/todo"
 sync() {
 	rsync "$file" "$SYNC_FOLDER"
 }
