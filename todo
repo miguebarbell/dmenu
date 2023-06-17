@@ -8,7 +8,8 @@
 
 # file="$XDG_DATA_HOME/calcurse/todo"
 SYNC_FOLDER="$XDG_DATA_HOME/calcurse/"
-file="$XDG_DATA_HOME/todo"
+# file="$XDG_DATA_HOME/todo"
+file="$XDG_SYNC_HOME/todo"
 sync() {
 	rsync "$file" "$SYNC_FOLDER"
 }
