@@ -49,13 +49,13 @@ function search_tgx() {
 		if [[ "$WHAT" == "Stream" ]]; then
 			echo "Streaming $TITLE"
 			peerflix "$MAGNET" --vlc
+			exit 0
 			# fi
 			# peerflix "$MAGNET" -k -q -r
-		else
-			echo "Downloading $TITLE"
-			transmission-daemon && sleep 3 && transmission-remote -a "$MAGNET"
 		fi
 	fi
+	echo "Downloading $TITLE"
+	transmission-daemon && sleep 3 && transmission-remote -a "$MAGNET"
 }
 
 search_tgx "$QUERY" "$CAT"
