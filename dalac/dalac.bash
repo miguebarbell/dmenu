@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-THEME_FOLDER=$XDG_CONFIG_HOME/alacritty/alacritty-theme/themes/
+THEME_FOLDER=$XDG_CONFIG_HOME/alacritty/themes/themes/
 WAL_THEME=$XDG_CACHE_HOME/wal/colors.alacritty.yml
 ALACRITTY_CONF=$XDG_CONFIG_HOME/alacritty/alacritty.yml
 

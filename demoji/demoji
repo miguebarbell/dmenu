@@ -6,14 +6,16 @@
 chosen=$(cut -d ';' -f1 ~/Projects/dmenu/demoji/emoji | dmenu -i -l 30 | sed "s/ .*//")
 #chosen=$(cut -d ';' -f1 ~/.local/share/larbs/emoji | dmenu -i -l 30 | sed "s/ .*//")
 
+X11=$([ "$XDG_SESSION_TYPE" = "tty" ] && echo true || echo false)
+DOTOOL=$(if $X11;then echo xdotool; else echo ydotool; fi )
 # Exit if none chosen.
 [ -z "$chosen" ] && exit
 
 # If you run this command with an argument, it will automatically insert the
 # character. Otherwise, show a message that the emoji has been copied.
 if [ -n "$1" ]; then
-	xdotool type "$chosen"
+	$DOTOOL type "$chosen"
 else
-	printf "$chosen" | xclip -selection clipboard
+	printf "$chosen" | if $X11;then xclip -selection clipboard;else wl-copy; fi
 	notify-send "'$chosen' copied to clipboard." &
 fi
