@@ -16,6 +16,6 @@ DOTOOL=$(if $X11;then echo xdotool; else echo ydotool; fi )
 if [ -n "$1" ]; then
 	$DOTOOL type "$chosen"
 else
-	printf "$chosen" | if $X11;then xclip -selection clipboard;else wl-copy; fi
-	notify-send "'$chosen' copied to clipboard." &
+	printf "%s" "$chosen" | if $X11;then xclip -selection clipboard;else wl-copy; fi
+	notify-send "$chosen" "copied to clipboard." &
 fi
